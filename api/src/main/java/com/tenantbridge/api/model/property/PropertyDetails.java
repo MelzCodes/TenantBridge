@@ -1,4 +1,4 @@
-package com.tenantbridge.api.models.user;
+package com.tenantbridge.api.model.property;
 
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -7,25 +7,23 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
-import org.springframework.data.mongodb.core.mapping.MongoId;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-@Document(collection = "Users")
-public class UserModel {
-
-    @MongoId
+@Document(collection = "PropertyDetails")
+public class PropertyDetails {
+    @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
+
+    @DBRef
+    private Property property;
+
     @NotNull
-    private String firstName;
-    @NotNull
-    private String lastName;
-    @NotNull
-    private String email;
-    @NotNull
-    private String password;
+    private double rentPerMonth;
 }

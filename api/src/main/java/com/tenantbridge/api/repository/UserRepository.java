@@ -7,7 +7,7 @@ import org.springframework.stereotype.Repository;
 import java.util.Optional;
 
 @Repository
-public abstract class UserRepository implements MongoRepository<User, Integer> {
+public interface UserRepository extends MongoRepository<User, String> {
 
-    public Optional<User> findUserByEmail;
+    Optional<User> findUserByEmail(String email);
 }

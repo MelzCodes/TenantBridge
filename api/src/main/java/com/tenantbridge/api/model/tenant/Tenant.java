@@ -23,7 +23,7 @@ public class Tenant {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Integer id;
+    private String id;
 
     @DBRef
     private User user;

@@ -5,5 +5,5 @@ import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public abstract class PropertyDetailsRepository implements MongoRepository<PropertyDetails, Integer> {
+public interface PropertyDetailsRepository extends MongoRepository<PropertyDetails, String> {
 }

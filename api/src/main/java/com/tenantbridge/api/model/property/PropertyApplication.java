@@ -22,7 +22,7 @@ public class PropertyApplication {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Integer id;
+    private String id;
 
     @DBRef
     private List<Tenant> applicants;

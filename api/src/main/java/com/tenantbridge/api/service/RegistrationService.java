@@ -19,7 +19,7 @@ public class RegistrationService {
 
     public ResponseEntity<ApiResponse> register(RegistrationRequestBody requestBody){
 
-        if(userRepository.findUserByEmail.isPresent()){
+        if(userRepository.findUserByEmail(requestBody.email()).isEmpty()){
             User user = new User(
                     requestBody.firstName(),
                     requestBody.lastName(),

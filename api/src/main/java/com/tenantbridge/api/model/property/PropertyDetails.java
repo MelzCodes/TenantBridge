@@ -19,7 +19,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 public class PropertyDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Integer id;
+    private String id;
 
     @DBRef
     private Property property;

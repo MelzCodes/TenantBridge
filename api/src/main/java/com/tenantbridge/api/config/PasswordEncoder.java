@@ -1,4 +1,4 @@
-package com.tenantbridge.api.security.config;
+package com.tenantbridge.api.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

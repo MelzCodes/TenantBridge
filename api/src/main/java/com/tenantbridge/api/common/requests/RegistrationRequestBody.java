@@ -1,4 +1,4 @@
-package com.tenantbridge.api.common;
+package com.tenantbridge.api.common.requests;
 
 import jakarta.validation.constraints.NotBlank;
 

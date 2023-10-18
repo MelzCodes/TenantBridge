@@ -1,7 +1,7 @@
 package com.tenantbridge.api.service;
 
-import com.tenantbridge.api.common.ApiResponse;
-import com.tenantbridge.api.common.LoginRequestBody;
+import com.tenantbridge.api.common.responses.BaseApiResponse;
+import com.tenantbridge.api.common.requests.LoginRequestBody;
 import com.tenantbridge.api.repository.UserRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -14,9 +14,9 @@ public class LoginService {
 
     private UserRepository userRepository;
 
-    public ResponseEntity<ApiResponse> login(LoginRequestBody requestBody){
+    public ResponseEntity<BaseApiResponse> login(LoginRequestBody requestBody){
 
-        return new ResponseEntity<>(new ApiResponse(false, "User with this email already exists"), HttpStatus.UNAUTHORIZED);
+        return new ResponseEntity<>(new BaseApiResponse(false, "User with this email already exists"), HttpStatus.UNAUTHORIZED);
     }
 
 }

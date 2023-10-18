@@ -1,8 +1,8 @@
 package com.tenantbridge.api.service;
 
-import com.tenantbridge.api.common.AuthenticationResponse;
-import com.tenantbridge.api.common.LoginRequestBody;
-import com.tenantbridge.api.common.RegistrationRequestBody;
+import com.tenantbridge.api.common.responses.AuthenticationResponse;
+import com.tenantbridge.api.common.requests.LoginRequestBody;
+import com.tenantbridge.api.common.requests.RegistrationRequestBody;
 import com.tenantbridge.api.model.Role;
 import com.tenantbridge.api.model.User;
 import com.tenantbridge.api.repository.UserRepository;

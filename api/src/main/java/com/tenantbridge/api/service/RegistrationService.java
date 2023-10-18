@@ -1,38 +1,61 @@
 package com.tenantbridge.api.service;
 
-import com.tenantbridge.api.common.ApiResponse;
+import com.tenantbridge.api.common.AuthenticationResponse;
+import com.tenantbridge.api.common.LoginRequestBody;
 import com.tenantbridge.api.common.RegistrationRequestBody;
+import com.tenantbridge.api.model.Role;
 import com.tenantbridge.api.model.User;
 import com.tenantbridge.api.repository.UserRepository;
-import lombok.AllArgsConstructor;
+import com.tenantbridge.api.service.auth.JWTService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Service;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.stereotype.Service;
 
 @Service
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class RegistrationService {
 
-    private UserRepository userRepository;
-    private BCryptPasswordEncoder bCryptPasswordEncoder;
+    private final UserRepository userRepository;
+    private final BCryptPasswordEncoder bCryptPasswordEncoder;
+    private final JWTService jwtService;
+    private final AuthenticationManager authenticationManager;
 
-    public ResponseEntity<ApiResponse> register(RegistrationRequestBody requestBody){
+    public ResponseEntity<AuthenticationResponse> register(RegistrationRequestBody requestBody){
 
         if(userRepository.findUserByEmail(requestBody.email()).isEmpty()){
-            User user = new User(
-                    requestBody.firstName(),
-                    requestBody.lastName(),
-                    requestBody.email(),
-                    requestBody.password()
-            );
+            User user = User.builder()
+                    .firstName(requestBody.firstName())
+                    .lastName(requestBody.lastName())
+                    .email(requestBody.email())
+                    .password(requestBody.password())
+                    .role(Role.USER)
+                    .build();
             String encodedPassword = bCryptPasswordEncoder.encode(user.getPassword());
             user.setPassword(encodedPassword);
             userRepository.save(user);
-            return new ResponseEntity<>(new ApiResponse(true, "User successfully created"), HttpStatus.CREATED);
+            String jwtToken = jwtService.generateToken(user);
+            return new ResponseEntity<>(new AuthenticationResponse(true, "User successfully created", jwtToken), HttpStatus.CREATED);
         }
 
-        return new ResponseEntity<>(new ApiResponse(false, "User with this email already exists"), HttpStatus.UNAUTHORIZED);
+        return new ResponseEntity<>(new AuthenticationResponse(false, "User already exists", null), HttpStatus.UNAUTHORIZED);
+    }
+
+    public ResponseEntity<AuthenticationResponse> authenticate(LoginRequestBody requestBody){
+        authenticationManager.authenticate(
+                new UsernamePasswordAuthenticationToken(
+                        requestBody.email(),
+                        requestBody.password()
+                )
+        );
+        if(userRepository.findUserByEmail(requestBody.email()).isEmpty())
+            return new ResponseEntity<>(new AuthenticationResponse(false, "User doesn't exist", null), HttpStatus.NOT_FOUND);
+        User user = userRepository.findUserByEmail(requestBody.email()).get();
+        String jwtToken = jwtService.generateToken(user);
+        return new ResponseEntity<>(new AuthenticationResponse(true, "User authenticated", jwtToken), HttpStatus.OK);
     }
 
 }

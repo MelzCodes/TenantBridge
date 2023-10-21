@@ -1,4 +1,4 @@
-package com.tenantbridge.api.service;
+package com.tenantbridge.api.service.auth;
 
 import com.tenantbridge.api.common.responses.AuthenticationResponse;
 import com.tenantbridge.api.common.requests.LoginRequestBody;
@@ -26,7 +26,7 @@ public class RegistrationService {
 
     public ResponseEntity<AuthenticationResponse> register(RegistrationRequestBody requestBody){
 
-        if(userRepository.findUserByEmail(requestBody.email()).isEmpty()){
+        if (userRepository.findUserByEmail(requestBody.email()).isEmpty()) {
             User user = User.builder()
                     .firstName(requestBody.firstName())
                     .lastName(requestBody.lastName())

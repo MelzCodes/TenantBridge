@@ -1,4 +1,4 @@
-package com.tenantbridge.api.service;
+package com.tenantbridge.api.service.auth;
 
 import com.tenantbridge.api.common.responses.BaseApiResponse;
 import com.tenantbridge.api.common.requests.LoginRequestBody;

@@ -3,7 +3,7 @@ package com.tenantbridge.api.controllers.auth;
 import com.tenantbridge.api.common.responses.AuthenticationResponse;
 import com.tenantbridge.api.common.requests.LoginRequestBody;
 import com.tenantbridge.api.common.requests.RegistrationRequestBody;
-import com.tenantbridge.api.service.RegistrationService;
+import com.tenantbridge.api.service.auth.RegistrationService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;

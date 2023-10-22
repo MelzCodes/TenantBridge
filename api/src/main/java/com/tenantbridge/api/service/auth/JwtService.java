@@ -17,11 +17,11 @@ import java.util.Map;
 import java.util.function.Function;
 
 @Service
-public class JWTService {
+public class JwtService {
     private final String SECRET_KEY;
 
     @Autowired
-    public JWTService(@Value("${jwt.enckey}") String secretKey) {
+    public JwtService(@Value("${jwt.enckey}") String secretKey) {
         this.SECRET_KEY = secretKey;
     }
 

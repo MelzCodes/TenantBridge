@@ -1,4 +1,4 @@
-package com.tenantbridge.api.model;
+package com.tenantbridge.api.model.user;
 
 public enum Role {
     USER,

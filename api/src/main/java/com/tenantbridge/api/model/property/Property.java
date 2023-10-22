@@ -1,6 +1,6 @@
 package com.tenantbridge.api.model.property;
 
-import com.tenantbridge.api.model.User;
+import com.tenantbridge.api.model.user.User;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import lombok.AllArgsConstructor;

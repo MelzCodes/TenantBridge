@@ -1,9 +1,10 @@
-package com.tenantbridge.api.model.tenant;
+package com.tenantbridge.api.model.user;
 
-import com.tenantbridge.api.model.user.User;
-import com.tenantbridge.api.model.property.PropertyApplication;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
+import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -12,26 +13,27 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-import java.util.List;
-
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-@Document(collection = "Tenants")
-public class Tenant {
+@Document(collection = "Tokens")
+public class Token {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private String id;
 
+    @NotBlank
+    private String token;
+
+    @Enumerated(EnumType.STRING)
+    private TokenType tokenType;
+
+    private boolean expired;
+
+    private boolean revoked;
+
     @DBRef
     private User user;
-
-    @DBRef
-    private List<PropertyApplication> applications;
-
-    @DBRef
-    private TenantDetails tenantDetails;
-
 }

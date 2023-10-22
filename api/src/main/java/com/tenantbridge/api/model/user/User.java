@@ -1,4 +1,4 @@
-package com.tenantbridge.api.model;
+package com.tenantbridge.api.model.user;
 
 import com.tenantbridge.api.model.tenant.Tenant;
 import jakarta.persistence.EnumType;
@@ -42,18 +42,14 @@ public class User implements UserDetails {
     @NotBlank
     private String password;
 
-    @DBRef
-    private Tenant tenant;
-
     @Enumerated(EnumType.STRING)
     private Role role;
 
-    public User(String firstName, String lastName, String email, String password) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.email = email;
-        this.password = password;
-    }
+    @DBRef
+    private List<Token> tokens;
+
+    @DBRef
+    private Tenant tenant;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

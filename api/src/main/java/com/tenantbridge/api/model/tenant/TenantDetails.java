@@ -31,7 +31,4 @@ public class TenantDetails {
     private Address currentAddress;
 
     private LocalDate dateOfBirth;
-
-    //private List<String> userUploadedDocuments;
-
 }

@@ -1,6 +1,6 @@
 package com.tenantbridge.api.model.property;
 
-import com.tenantbridge.api.model.Landlord;
+import com.tenantbridge.api.model.tenant.Tenant;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import lombok.AllArgsConstructor;
@@ -11,23 +11,19 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.util.List;
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
 @Document(collection = "Properties")
-public class Property {
+public class Tenancy {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private String id;
 
     @DBRef
-    private Tenancy tenancy;
-
-    @DBRef
-    private Landlord landlord;
-
-    @DBRef
-    private PropertyDetails propertyDetails;
+    private List<Tenant> tenants;
 }

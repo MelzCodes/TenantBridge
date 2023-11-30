@@ -1,5 +1,6 @@
 package com.tenantbridge.api.model;
 
+import com.tenantbridge.api.model.property.PropertyDetails;
 import com.tenantbridge.api.model.tenant.TenantDetails;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -42,4 +43,9 @@ public class Address {
     @DBRef
     private TenantDetails tenantDetails;
 
+    @DBRef
+    private PropertyDetails propertyDetails;
+
+    @DBRef
+    private Landlord landlord;
 }

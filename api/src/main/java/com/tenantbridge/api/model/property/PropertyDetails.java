@@ -1,5 +1,6 @@
 package com.tenantbridge.api.model.property;
 
+import com.tenantbridge.api.model.Address;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.validation.constraints.NotNull;
@@ -10,6 +11,8 @@ import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
+
+import java.util.List;
 
 @Data
 @NoArgsConstructor
@@ -24,6 +27,22 @@ public class PropertyDetails {
     @DBRef
     private Property property;
 
+    @DBRef
+    private Address address;
+
     @NotNull
     private double rentPerMonth;
+
+    @NotNull
+    private int occupancyLimit;
+
+    private int bathrooms;
+
+    private String dimensions;
+
+    private List<String> images;
+
+    private Status status;
+
+    private String description;
 }

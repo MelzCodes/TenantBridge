@@ -4,6 +4,8 @@ import com.tenantbridge.api.common.requests.UpdateTenantRequestBody;
 import com.tenantbridge.api.common.responses.BaseApiResponse;
 import com.tenantbridge.api.common.responses.GetDetailsResponse;
 import com.tenantbridge.api.common.responses.ListAllObjectsResponse;
+import com.tenantbridge.api.common.validator.ValidateParameters;
+import com.tenantbridge.api.model.tenant.Tenant;
 import com.tenantbridge.api.model.tenant.TenantDetails;
 import com.tenantbridge.api.service.TenantService;
 import lombok.RequiredArgsConstructor;
@@ -23,13 +25,15 @@ public class TenantController {
     }
 
     @PostMapping
-    public ResponseEntity<BaseApiResponse> createTenant(@RequestBody TenantDetails tenantDetails){
-        return ResponseEntity.ok(new BaseApiResponse(true, "to be done"));
+    @ValidateParameters
+    public ResponseEntity<BaseApiResponse> createTenant(@RequestBody Tenant tenant){
+        return tenantService.createTenant(tenant);
     }
 
-    @PutMapping("/{tenantId}")
-    public ResponseEntity<BaseApiResponse> editTenant(@PathVariable String tenantId, @RequestBody UpdateTenantRequestBody TenantRequestBody){
-        return ResponseEntity.ok(new BaseApiResponse(true, "to be done"));
+    @PutMapping
+    @ValidateParameters
+    public ResponseEntity<BaseApiResponse> editTenant(@RequestBody UpdateTenantRequestBody tenantRequestBody){
+        return tenantService.updateTenantDetails(tenantRequestBody);
     }
 
     @GetMapping("/{tenantId}")
@@ -41,5 +45,5 @@ public class TenantController {
     public ResponseEntity<BaseApiResponse> deleteTenant(@PathVariable String tenantId){
         return tenantService.deleteTenant(tenantId);
     }
-    //associate with a tenancy, remove from a tenancy
+    //associate with a tenancy, remove from a tenancy, associate existing user, handle non user
 }

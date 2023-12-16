@@ -1,8 +1,7 @@
 package com.tenantbridge.api.common.requests;
 
+import com.tenantbridge.api.model.tenant.TenantDetails;
 import jakarta.validation.constraints.NotNull;
 
-import java.time.LocalDate;
-
-public record UpdateTenantRequestBody(@NotNull LocalDate dateOfBirth ) {
+public record UpdateTenantRequestBody(@NotNull String tenantId, @NotNull TenantDetails tenantDetails) {
 }

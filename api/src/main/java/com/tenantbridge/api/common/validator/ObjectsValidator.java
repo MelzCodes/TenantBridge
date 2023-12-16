@@ -1,4 +1,4 @@
-package com.tenantbridge.api.common;
+package com.tenantbridge.api.common.validator;
 
 import com.tenantbridge.api.common.mappers.ObjectNotValidException;
 import jakarta.validation.ConstraintViolation;
